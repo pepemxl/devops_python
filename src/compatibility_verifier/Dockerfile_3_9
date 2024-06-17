@@ -1,0 +1,23 @@
+FROM ubuntu:24.04
+
+LABEL maintainer="pepemxl@gmail.com"
+
+# Actualiza los paquetes del sistema e instala Python 3.9 y pip
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update && \
+    apt-get install -y python3.9 python3.9-venv python3.9-distutils curl && \
+#    apt-get install -y python3.9 python3.9-venv python3-pip && \
+    apt-get clean
+
+COPY requirements.txt /app/requirements.txt
+COPY verificador.py /app/verificador.py
+
+WORKDIR /app
+
+# Instala las dependencias de Python
+RUN python3.9 -m pip install --upgrade pip 
+RUN pip install -r requirements.txt
+
+CMD ["python3.9", "verificador.py"]

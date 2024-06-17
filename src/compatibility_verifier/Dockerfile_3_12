@@ -1,0 +1,27 @@
+# Usa la imagen base de Ubuntu 24.04
+FROM ubuntu:24.04
+
+# Establece el mantenedor del Dockerfile
+LABEL maintainer="tu_email@ejemplo.com"
+
+# Actualiza los paquetes del sistema e instala Python 3.12 y pip
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get install -y python3.12 python3.12-venv python3-pip && \
+    apt-get clean
+
+# Copia los archivos de la aplicación al contenedor
+COPY requirements.txt /app/requirements.txt
+COPY verificador.py /app/verificador.py
+
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# Instala las dependencias de Python
+RUN python3.12 -m pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# Ejecuta el script verificador
+CMD ["python3.12", "verificador.py"]

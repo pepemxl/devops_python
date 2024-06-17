@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  python3.9:
+    build:
+      context: .
+      dockerfile: Dockerfile_3_9
+    container_name: verificador_python_3.9
+
+  # python3.10:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile_3_10
+  #   container_name: verificador_python_3.10
+
+  # python3.11:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile_3_11
+  #   container_name: verificador_python_3.11
+
+  # python3.12:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile_3_12
+  #   container_name: verificador_python_3.12
